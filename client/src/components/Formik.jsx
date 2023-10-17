@@ -28,10 +28,10 @@ const Formik = () => {
     }),
     onSubmit: (values, { resetForm, setStatus }) => {
       // URL API
-      const apiUrl = import.meta.env.VITE_APP_API_URL;
+      // const apiUrl = import.meta.env.VITE_APP_API_URL;
 
       // Fetch post data
-      Axios.post(`${apiUrl}/api/post`, values)
+      Axios.post(`https://surfin-api.isoluti.com/api/post`, values)
         .then((response) => {
           setStatus(response.status);
           console.log(response);
