@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - main
+name: :fusée: Deploy website on push
+jobs:
+  job1:
+    name: :tada: Deploy Frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - name: :camion: Get latest code
+        uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: :marteau: Build Project
+        run: |
+          npm install
+          npm run build
+      - name: :dossier_ouvert: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.isoluti.com
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          local-dir: client/dist/
